@@ -986,7 +986,7 @@ function inferRisks(form) {
   return risks.length ? risks : ["No se observan riesgos críticos, pero sí conviene mantener validaciones periódicas del enfoque."];
 }
 
-function buildNarrativeSummary({ student, form, primary, secondary, methodologyAverage, methodologyLevel, strengths }) {
+function buildNarrativeSummary({ student, form, primary, secondary, methodologicalAverage, methodologyLevel, strengths }) {
   const evidenceMap = {
     qualitative: "prefiere evidencia cualitativa y lectura contextual",
     quantitative: "se siente más cómodo trabajando con evidencia cuantitativa",
