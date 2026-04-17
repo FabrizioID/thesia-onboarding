@@ -6,93 +6,154 @@ const APP_CONFIG = {
   localStorageKey: "thesia-onboarding-records-v1",
 };
 
-const RESEARCH_TOPICS = {
-  education_ai: [
-    {
-      title: "Uso de asistentes de IA para formular problemas de investigación en estudiantes universitarios",
-      angle: "aprendizaje, diseño instruccional y acompañamiento académico",
-      methodology: "mixto con rúbrica de calidad y comparación pre/post",
+const TOPIC_BLUEPRINTS = [
+  {
+    id: "aec-automation-metrados",
+    cluster: "optimization_systems",
+    sectors: ["aec", "business"],
+    focuses: ["automation", "productivity"],
+    outputs: ["automation", "dashboard"],
+    evidence: ["tabular", "documents"],
+    methods: ["applied", "quantitative"],
+    titles: {
+      aec: "Automatización del procesamiento de metrados y reportes técnicos con Python e IA en proyectos de construcción",
+      generic: "Automatización de tareas repetitivas con Python e IA para mejorar productividad operativa",
     },
-    {
-      title: "Efecto de la IA generativa en la claridad argumentativa de trabajos académicos",
-      angle: "redacción, pensamiento crítico y mejora iterativa",
-      methodology: "cuasi experimental con análisis de textos",
+    angle: "reducción de tiempos, errores y retrabajo en flujos manuales",
+    methodology: "estudio aplicado con análisis de procesos y medición antes/después",
+  },
+  {
+    id: "aec-computer-vision-epp",
+    cluster: "optimization_systems",
+    sectors: ["aec", "health"],
+    focuses: ["quality", "safety"],
+    outputs: ["prototype", "predictive"],
+    evidence: ["images"],
+    methods: ["quantitative", "applied"],
+    titles: {
+      aec: "Diseño de un sistema de visión artificial para detección de EPP o condiciones inseguras en obra",
+      generic: "Aplicación de visión artificial para detección automática de cumplimiento operativo",
     },
-    {
-      title: "Factores que influyen en la adopción de copilotos académicos en procesos de tesis",
-      angle: "experiencia del usuario y apropiación tecnológica",
-      methodology: "encuesta + entrevistas semiestructuradas",
+    angle: "computer vision aplicada a seguridad, monitoreo y control de cumplimiento",
+    methodology: "diseño e implementación de prototipo evaluado con imágenes o video",
+  },
+  {
+    id: "aec-predictive-cost-time",
+    cluster: "data_decision",
+    sectors: ["aec", "business"],
+    focuses: ["prediction", "decision"],
+    outputs: ["predictive", "dashboard"],
+    evidence: ["tabular"],
+    methods: ["quantitative"],
+    titles: {
+      aec: "Modelo predictivo para estimar desviaciones de costo o plazo en proyectos de ingeniería civil",
+      generic: "Modelo predictivo para anticipar desviaciones operativas y mejorar la toma de decisiones",
     },
-  ],
-  data_decision: [
-    {
-      title: "Aplicación de analítica predictiva para mejorar la toma de decisiones en contextos educativos",
-      angle: "indicadores, alertas tempranas y modelos de apoyo",
-      methodology: "cuantitativo con modelado y validación de métricas",
+    angle: "predicción de riesgos, plazos y comportamiento de variables críticas",
+    methodology: "cuantitativo con modelado predictivo y validación de métricas",
+  },
+  {
+    id: "aec-chatbot-normas",
+    cluster: "digital_innovation",
+    sectors: ["aec", "technology"],
+    focuses: ["documents", "decision"],
+    outputs: ["chatbot", "prototype"],
+    evidence: ["documents"],
+    methods: ["applied", "mixed"],
+    titles: {
+      aec: "Diseño de un chatbot con IA para consulta asistida de normativa técnica en ingeniería civil",
+      generic: "Diseño de un asistente conversacional con IA para consulta de documentación especializada",
     },
-    {
-      title: "Uso de dashboards inteligentes para priorización de problemas institucionales",
-      angle: "datos, visualización y gestión basada en evidencia",
-      methodology: "estudio aplicado con analítica descriptiva y correlacional",
+    angle: "consulta inteligente de normativa, documentos y criterios técnicos",
+    methodology: "diseño-propuesta con validación funcional y pruebas de uso",
+  },
+  {
+    id: "thesis-copilot-formulation",
+    cluster: "education_ai",
+    sectors: ["education"],
+    focuses: ["experience", "productivity"],
+    outputs: ["chatbot", "prototype"],
+    evidence: ["documents", "survey"],
+    methods: ["mixed", "applied"],
+    titles: {
+      education: "Diseño de un copiloto con IA para apoyar la formulación del problema de tesis en estudiantes universitarios",
+      generic: "Diseño de un copiloto con IA para mejorar la formulación de problemas de investigación",
     },
-    {
-      title: "Relación entre calidad de datos y precisión de recomendaciones asistidas por IA",
-      angle: "gobernanza de datos y desempeño del modelo",
-      methodology: "cuantitativo comparativo",
+    angle: "acompañamiento académico, claridad del problema y mejora iterativa",
+    methodology: "mixto con validación por rúbrica y percepción de usuarios",
+  },
+  {
+    id: "thesis-writing-feedback",
+    cluster: "education_ai",
+    sectors: ["education"],
+    focuses: ["documents", "quality"],
+    outputs: ["prototype", "automation"],
+    evidence: ["documents"],
+    methods: ["mixed", "qualitative"],
+    titles: {
+      education: "Uso de IA generativa para retroalimentación de redacción académica en trabajos de investigación",
+      generic: "Uso de IA generativa para mejorar claridad y coherencia en redacción académica",
     },
-  ],
-  digital_innovation: [
-    {
-      title: "Diseño de un roadmap de adopción de IA en procesos académicos o administrativos",
-      angle: "transformación digital y priorización estratégica",
-      methodology: "caso aplicado con entrevistas y matriz de madurez",
+    angle: "calidad argumentativa, coherencia y soporte de escritura",
+    methodology: "cuasi experimental con análisis comparativo de textos",
+  },
+  {
+    id: "dashboard-decision-support",
+    cluster: "data_decision",
+    sectors: ["business", "public", "health", "education"],
+    focuses: ["decision", "productivity"],
+    outputs: ["dashboard"],
+    evidence: ["tabular", "survey"],
+    methods: ["quantitative", "mixed"],
+    titles: {
+      generic: "Diseño de un dashboard inteligente para priorización de decisiones basado en indicadores clave",
     },
-    {
-      title: "Impacto percibido de herramientas de IA en la eficiencia de flujos de investigación",
-      angle: "automatización, productividad y experiencia operativa",
-      methodology: "mixto con encuesta y seguimiento de tiempos",
+    angle: "visualización, priorización y decisiones basadas en evidencia",
+    methodology: "estudio aplicado con analítica descriptiva y validación con usuarios",
+  },
+  {
+    id: "digital-adoption-ai",
+    cluster: "social_research",
+    sectors: ["education", "business", "public", "health"],
+    focuses: ["ethics", "experience"],
+    outputs: ["diagnostic", "strategy"],
+    evidence: ["survey", "interviews"],
+    methods: ["qualitative", "mixed"],
+    titles: {
+      generic: "Factores que influyen en la adopción de herramientas de IA en un contexto organizacional o académico",
     },
-    {
-      title: "Modelo de integración de copilotos para acompañamiento del ciclo de investigación",
-      angle: "innovación de servicio y arquitectura de soporte",
-      methodology: "diseño-propuesta con validación experta",
+    angle: "barreras, confianza, apropiación tecnológica y cambio organizacional",
+    methodology: "encuesta + entrevistas semiestructuradas",
+  },
+  {
+    id: "process-improvement-ai",
+    cluster: "digital_innovation",
+    sectors: ["business", "public", "aec"],
+    focuses: ["automation", "decision", "quality"],
+    outputs: ["strategy", "automation"],
+    evidence: ["tabular", "documents", "interviews"],
+    methods: ["applied", "mixed"],
+    titles: {
+      generic: "Propuesta de mejora de procesos con apoyo de IA para reducir tiempos y errores operativos",
     },
-  ],
-  social_research: [
-    {
-      title: "Percepción ética del uso de IA en investigación académica universitaria",
-      angle: "confianza, transparencia y criterios de uso responsable",
-      methodology: "cualitativo con grupos focales o entrevistas",
+    angle: "transformación digital, automatización y rediseño de procesos",
+    methodology: "caso aplicado con mapeo de proceso y validación de mejora",
+  },
+  {
+    id: "document-analysis-ai",
+    cluster: "optimization_systems",
+    sectors: ["aec", "public", "education", "business"],
+    focuses: ["documents", "quality"],
+    outputs: ["automation", "prototype"],
+    evidence: ["documents"],
+    methods: ["applied", "mixed"],
+    titles: {
+      generic: "Sistema de análisis de documentos con IA para extraer, clasificar o validar información clave",
     },
-    {
-      title: "Barreras y facilitadores para incorporar IA en proyectos con impacto social",
-      angle: "brechas de adopción y valor público",
-      methodology: "mixto con análisis temático",
-    },
-    {
-      title: "Uso de IA para priorización de problemas sociales desde datos y testimonios",
-      angle: "investigación aplicada y lectura contextual",
-      methodology: "diseño exploratorio secuencial",
-    },
-  ],
-  optimization_systems: [
-    {
-      title: "Optimización de procesos de formulación y revisión académica con apoyo de IA",
-      angle: "flujo, tiempos y puntos de fricción",
-      methodology: "estudio aplicado con análisis de procesos",
-    },
-    {
-      title: "Sistema de recomendación de temas de investigación basado en perfil estudiantil",
-      angle: "matching de afinidad, habilidades y objetivos",
-      methodology: "diseño e implementación de prototipo evaluado",
-    },
-    {
-      title: "Priorización multicriterio de líneas de investigación con apoyo algorítmico",
-      angle: "toma de decisiones, ranking y criterios expertos",
-      methodology: "cuantitativo con análisis multicriterio",
-    },
-  ],
-};
+    angle: "procesamiento inteligente de PDFs, normas, expedientes o reportes",
+    methodology: "diseño e implementación de prototipo con validación funcional",
+  },
+];
 
 const PROFILE_ARCHETYPES = {
   education_ai: {
@@ -147,29 +208,34 @@ const STEP_DEFINITIONS = [
 
 const INTEREST_OPTIONS = [
   {
+    value: "aec",
+    label: "Construcción, BIM e ingeniería civil",
+    description: "Procesos de obra, oficina técnica, metrados, seguridad, modelos BIM o control de proyecto.",
+  },
+  {
     value: "education",
-    label: "Educación y aprendizaje",
-    description: "Me interesa mejorar enseñanza, evaluación, tutoría o acompañamiento académico.",
+    label: "Educación e investigación académica",
+    description: "Formulación de tesis, acompañamiento académico, redacción o aprendizaje asistido por IA.",
+  },
+  {
+    value: "business",
+    label: "Negocios, operaciones y gestión",
+    description: "Procesos operativos, productividad, control, automatización o decisiones de gestión.",
+  },
+  {
+    value: "public",
+    label: "Sector público o servicios institucionales",
+    description: "Procesos documentarios, priorización, atención o mejora de servicios.",
   },
   {
     value: "health",
     label: "Salud y bienestar",
-    description: "Quiero explorar decisiones, seguimiento o análisis aplicado al sector salud.",
-  },
-  {
-    value: "business",
-    label: "Negocios y gestión",
-    description: "Me atraen eficiencia, estrategia, operaciones o gestión institucional.",
+    description: "Seguimiento, clasificación, apoyo a decisiones o mejora de procesos en salud.",
   },
   {
     value: "technology",
-    label: "Tecnología y sistemas",
-    description: "Me interesa construir, modelar o optimizar soluciones apoyadas en IA.",
-  },
-  {
-    value: "society",
-    label: "Sociedad, comportamiento y ética",
-    description: "Quiero entender percepciones, impactos y adopción responsable de la IA.",
+    label: "Tecnología, datos y sistemas inteligentes",
+    description: "Modelos, analítica, recomendadores, prototipos o servicios digitales con IA.",
   },
 ];
 
@@ -177,15 +243,37 @@ const PROBLEM_FOCUS_OPTIONS = [
   { value: "automation", label: "Automatizar tareas repetitivas", description: "Liberar tiempo y reducir fricción operacional." },
   { value: "prediction", label: "Predecir resultados", description: "Detectar patrones y anticipar comportamientos." },
   { value: "decision", label: "Mejorar decisiones", description: "Usar evidencia para priorizar acciones." },
-  { value: "experience", label: "Mejorar experiencia del usuario", description: "Diseñar apoyo más claro y útil para personas." },
-  { value: "ethics", label: "Abordar impacto y ética", description: "Comprender confianza, límites y uso responsable." },
-  { value: "productivity", label: "Acelerar producción académica", description: "Optimizar redacción, revisión o formulación." },
+  { value: "experience", label: "Mejorar experiencia del usuario", description: "Diseñar apoyo más claro, útil o guiado para personas." },
+  { value: "ethics", label: "Abordar adopción, confianza o ética", description: "Comprender barreras, percepciones y uso responsable." },
+  { value: "productivity", label: "Reducir tiempos de trabajo", description: "Acelerar ejecución de actividades técnicas o académicas." },
+  { value: "quality", label: "Detectar errores o incumplimientos", description: "Control de calidad, validación o cumplimiento de criterios." },
+  { value: "documents", label: "Analizar documentos o normativa", description: "Extraer, clasificar o consultar información desde archivos o textos." },
+  { value: "safety", label: "Monitorear seguridad o riesgo", description: "Detectar condiciones inseguras o factores de riesgo." },
 ];
 
 const EVIDENCE_OPTIONS = [
-  { value: "qualitative", label: "Cualitativa", description: "Entrevistas, observación, análisis temático y comprensión contextual." },
-  { value: "quantitative", label: "Cuantitativa", description: "Indicadores, métricas, encuestas y análisis numérico." },
-  { value: "mixed", label: "Mixta", description: "Combinar datos numéricos con evidencia narrativa." },
+  { value: "tabular", label: "Datos tabulares", description: "Excel, CSV, bases de datos, metrados, indicadores o registros." },
+  { value: "documents", label: "Documentos y PDFs", description: "Normas, expedientes, informes, tesis, memorias o reportes." },
+  { value: "images", label: "Imágenes o video", description: "Fotografías, capturas, video de obra o inspección visual." },
+  { value: "survey", label: "Encuestas o entrevistas", description: "Percepciones, experiencia de usuario o información declarativa." },
+  { value: "none", label: "Aún no tengo datos claros", description: "Tengo el interés, pero todavía no defino la fuente de evidencia." },
+];
+
+const THESIS_OUTPUT_OPTIONS = [
+  { value: "automation", label: "Automatización o script", description: "Una solución que reduzca tiempos o trabajo manual." },
+  { value: "dashboard", label: "Dashboard o soporte a decisiones", description: "Una herramienta para visualizar y priorizar información." },
+  { value: "predictive", label: "Modelo predictivo o clasificatorio", description: "Una solución que anticipe, detecte o clasifique." },
+  { value: "prototype", label: "Prototipo o sistema funcional", description: "Una aplicación, servicio o herramienta usable." },
+  { value: "chatbot", label: "Chatbot o asistente inteligente", description: "Un sistema conversacional para consulta o apoyo." },
+  { value: "diagnostic", label: "Diagnóstico o estudio de adopción", description: "Una investigación sobre barreras, madurez o percepción." },
+  { value: "strategy", label: "Propuesta de mejora o roadmap", description: "Una estrategia aplicada para transformar un proceso." },
+];
+
+const METHODOLOGY_OPTIONS = [
+  { value: "applied", label: "Aplicada / desarrollo", description: "Quiero construir o proponer una solución concreta." },
+  { value: "quantitative", label: "Cuantitativa", description: "Prefiero medir variables y trabajar con datos numéricos." },
+  { value: "qualitative", label: "Cualitativa", description: "Prefiero comprender percepciones, contextos y experiencias." },
+  { value: "mixed", label: "Mixta", description: "Quiero combinar medición con comprensión contextual." },
 ];
 
 const IMPACT_OPTIONS = [
@@ -228,10 +316,15 @@ const DEMO_DATA = [
     answers: {
       interestArea: "education",
       problemFocus: ["experience", "productivity"],
-      evidencePreference: "mixed",
+      evidencePreference: "documents",
+      thesisOutput: "chatbot",
+      methodologyPreference: "mixed",
       desiredImpact: "institutional",
+      unitOfAnalysis: "estudiantes universitarios en etapa inicial de tesis",
+      improvementGoal: "reducir bloqueos y mejorar la claridad del problema de investigación",
       literatureConfidence: 4,
       problemDefinitionConfidence: 4,
+      dataAccessConfidence: 4,
       dataAnalysisConfidence: 3,
       writingConfidence: 5,
       aiToolsConfidence: 5,
@@ -253,12 +346,17 @@ const DEMO_DATA = [
       institution: "Universidad Demo",
     },
     answers: {
-      interestArea: "technology",
+      interestArea: "aec",
       problemFocus: ["automation", "decision"],
-      evidencePreference: "quantitative",
+      evidencePreference: "tabular",
+      thesisOutput: "dashboard",
+      methodologyPreference: "applied",
       desiredImpact: "institutional",
+      unitOfAnalysis: "procesos de metrados y control en proyectos de ingeniería civil",
+      improvementGoal: "disminuir tiempos de consolidación y mejorar trazabilidad para decisiones",
       literatureConfidence: 3,
       problemDefinitionConfidence: 4,
+      dataAccessConfidence: 4,
       dataAnalysisConfidence: 5,
       writingConfidence: 3,
       aiToolsConfidence: 5,
@@ -311,12 +409,17 @@ function getInitialForm() {
     career: "",
     cycle: "",
     institution: "",
-    interestArea: "education",
-    problemFocus: ["experience"],
-    evidencePreference: "mixed",
+    interestArea: "aec",
+    problemFocus: ["automation"],
+    evidencePreference: "tabular",
+    thesisOutput: "automation",
+    methodologyPreference: "applied",
     desiredImpact: "institutional",
+    unitOfAnalysis: "",
+    improvementGoal: "",
     literatureConfidence: 3,
     problemDefinitionConfidence: 3,
+    dataAccessConfidence: 3,
     dataAnalysisConfidence: 3,
     writingConfidence: 3,
     aiToolsConfidence: 3,
@@ -336,7 +439,7 @@ function seedDemoData() {
 }
 
 function buildProfileRecordFromSeed(seed) {
-  const profile = buildProfile(seed.answers, seed.student);
+  const profile = buildProfileV2(seed.answers, seed.student);
   return {
     ...seed,
     profile,
@@ -547,7 +650,7 @@ function renderWizard() {
             <div class="progress-bar"><span style="width:${progress}%"></span></div>
           </div>
         </div>
-        <div id="step-content">${renderStepContent(step.id)}</div>
+        <div id="step-content">${renderStepContentV2(step.id)}</div>
         ${state.error ? `<div class="error-text">${state.error}</div>` : ""}
         ${state.status ? `<div class="status-text">${state.status}</div>` : ""}
         <div class="wizard-actions">
@@ -652,6 +755,123 @@ function renderStepContent(stepId) {
         <label for="openTopic">Describe el problema o tema que más te interesa explorar</label>
         <textarea id="openTopic" name="openTopic" placeholder="Ej. Me interesa investigar cómo la IA podría ayudar a estudiantes a mejorar la formulación de su tesis.">${escapeHtml(state.form.openTopic)}</textarea>
         <span class="helper">No tiene que ser perfecto. Solo necesitamos una pista del reto que te importa.</span>
+      </div>
+    </div>
+  `;
+}
+
+function renderStepContentV2(stepId) {
+  if (stepId === "identity") {
+    return `
+      <div class="form-grid">
+        ${renderField("Nombre completo", "fullName", "text", "Ej. Milagros Contreras Diaz")}
+        ${renderField("Correo", "email", "email", "Ej. milagros@correo.com")}
+        ${renderField("Carrera", "career", "text", "Ej. Ingenieria Civil, Sistemas, Educacion")}
+        ${renderField("Ciclo / nivel", "cycle", "text", "Ej. 8vo ciclo, egresado, maestria")}
+        ${renderField("Institucion", "institution", "text", "Ej. Universidad Nacional de ...", true)}
+      </div>
+    `;
+  }
+
+  if (stepId === "interests") {
+    return `
+      <div class="question-block">
+        <div class="question-header">
+          <strong>En que sector o contexto real quieres investigar?</strong>
+          <span class="muted">Elegimos el territorio donde debe aterrizar la tesis.</span>
+        </div>
+        <div class="option-grid" data-question="interestArea">
+          ${INTEREST_OPTIONS.map((item) => renderSelectableCard("interestArea", item.value, item.label, item.description, state.form.interestArea === item.value)).join("")}
+        </div>
+      </div>
+      <div class="question-block">
+        <div class="question-header">
+          <strong>Que tipo de problema quieres resolver?</strong>
+          <span class="muted">Puedes marcar hasta 2 focos para que el tema no salga generico.</span>
+        </div>
+        <div class="option-grid" data-question="problemFocus">
+          ${PROBLEM_FOCUS_OPTIONS.map((item) => renderSelectableCard("problemFocus", item.value, item.label, item.description, state.form.problemFocus.includes(item.value), true)).join("")}
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label>Con que evidencia real podrias trabajar?</label>
+          <div class="option-grid" data-question="evidencePreference">
+            ${EVIDENCE_OPTIONS.map((item) => renderSelectableCard("evidencePreference", item.value, item.label, item.description, state.form.evidencePreference === item.value)).join("")}
+          </div>
+        </div>
+        <div class="field">
+          <label>Que esperas producir como tesis?</label>
+          <div class="option-grid" data-question="thesisOutput">
+            ${THESIS_OUTPUT_OPTIONS.map((item) => renderSelectableCard("thesisOutput", item.value, item.label, item.description, state.form.thesisOutput === item.value)).join("")}
+          </div>
+        </div>
+        <div class="field full">
+          <label>Que nivel de impacto buscas?</label>
+          <div class="option-grid" data-question="desiredImpact">
+            ${IMPACT_OPTIONS.map((item) => renderSelectableCard("desiredImpact", item.value, item.label, item.description, state.form.desiredImpact === item.value)).join("")}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (stepId === "skills") {
+    return `
+      <div class="question-block">
+        <div class="question-header">
+          <strong>Que enfoque metodologico te calza mejor hoy?</strong>
+          <span class="muted">No es definitivo, pero nos ayuda a recomendar un tema viable y defendible.</span>
+        </div>
+        <div class="option-grid" data-question="methodologyPreference">
+          ${METHODOLOGY_OPTIONS.map((item) => renderSelectableCard("methodologyPreference", item.value, item.label, item.description, state.form.methodologyPreference === item.value)).join("")}
+        </div>
+      </div>
+      ${renderRatingQuestion("literatureConfidence", "Lectura de literatura y antecedentes", "Que tan comodo te sientes revisando papers, normas, documentos tecnicos o bases teoricas?")}
+      ${renderRatingQuestion("problemDefinitionConfidence", "Formulacion del problema", "Que tan preparado te sientes para delimitar problema, objetivos y pregunta de investigacion?")}
+      ${renderRatingQuestion("dataAccessConfidence", "Acceso a datos o evidencia", "Que tan viable ves conseguir informacion, registros, documentos, encuestas o imagenes para tu estudio?")}
+      ${renderRatingQuestion("dataAnalysisConfidence", "Analisis de datos o evidencias", "Que tan comodo te sientes interpretando datos, documentos o resultados de validacion?")}
+      ${renderRatingQuestion("writingConfidence", "Redaccion academica", "Que tan preparado te sientes para estructurar y redactar capitulos o entregables?")}
+      ${renderRatingQuestion("aiToolsConfidence", "Uso estrategico de IA", "Que tanto dominas herramientas de IA para explorar, sintetizar, programar o iterar?")}
+    `;
+  }
+
+  return `
+    <div class="question-block">
+      <div class="question-header">
+        <strong>Que te mueve a investigar este tema?</strong>
+        <span class="muted">Esto nos ayuda a priorizar enfoque, velocidad y formato de recomendacion.</span>
+      </div>
+      <div class="option-grid" data-question="motivation">
+        ${MOTIVATION_OPTIONS.map((item) => renderSelectableCard("motivation", item.value, item.label, item.description, state.form.motivation === item.value)).join("")}
+      </div>
+    </div>
+    <div class="form-grid">
+      <div class="field">
+        <label>En que momento estas?</label>
+        <div class="option-grid" data-question="urgency">
+          ${URGENCY_OPTIONS.map((item) => renderSelectableCard("urgency", item.value, item.label, item.description, state.form.urgency === item.value)).join("")}
+        </div>
+      </div>
+      <div class="field">
+        <label>Que tipo de acompanamiento te funciona mejor?</label>
+        <div class="option-grid" data-question="collaborationStyle">
+          ${COLLABORATION_OPTIONS.map((item) => renderSelectableCard("collaborationStyle", item.value, item.label, item.description, state.form.collaborationStyle === item.value)).join("")}
+        </div>
+      </div>
+      <div class="field full">
+        <label for="unitOfAnalysis">Unidad de analisis o escenario</label>
+        <input id="unitOfAnalysis" name="unitOfAnalysis" type="text" placeholder="Ej. metrados de edificaciones multifamiliares, estudiantes de tesis I, expedientes tecnicos municipales" value="${escapeHtml(state.form.unitOfAnalysis)}">
+        <span class="helper">Se especifico para quien, donde o sobre que proceso se hara la tesis.</span>
+      </div>
+      <div class="field full">
+        <label for="improvementGoal">Que mejora o resultado te gustaria demostrar?</label>
+        <input id="improvementGoal" name="improvementGoal" type="text" placeholder="Ej. reducir tiempo de revision, predecir desviaciones, mejorar trazabilidad, detectar incumplimientos" value="${escapeHtml(state.form.improvementGoal)}">
+      </div>
+      <div class="field full">
+        <label for="openTopic">Describe el problema o tema que mas te interesa explorar</label>
+        <textarea id="openTopic" name="openTopic" placeholder="Ej. Quiero automatizar la revision de reportes tecnicos o disenar un asistente para consultar normativa.">${escapeHtml(state.form.openTopic)}</textarea>
+        <span class="helper">No buscamos una redaccion perfecta; buscamos senales concretas para construir un mejor tema.</span>
       </div>
     </div>
   `;
@@ -782,7 +1002,7 @@ async function handleWizardAction(event) {
     institution: state.form.institution.trim(),
   };
 
-  const profile = buildProfile(state.form, student);
+  const profile = buildProfileV2(state.form, student);
   const record = {
     id: `profile-${Date.now()}`,
     createdAt: new Date().toISOString(),
@@ -815,9 +1035,17 @@ function validateStep(stepId) {
 
   if (stepId === "interests") {
     if (!state.form.problemFocus.length) return "Elige al menos un foco de problema.";
+    if (!state.form.thesisOutput) return "Elige que tipo de salida esperas producir en la tesis.";
+    if (!state.form.evidencePreference) return "Indica con que evidencia podrias trabajar.";
+  }
+
+  if (stepId === "skills") {
+    if (!state.form.methodologyPreference) return "Selecciona el enfoque metodologico que mejor te represente.";
   }
 
   if (stepId === "motivations") {
+    if (!state.form.unitOfAnalysis.trim()) return "Describe la unidad de analisis o escenario donde se aplicaria la tesis.";
+    if (!state.form.improvementGoal.trim()) return "Indica que mejora o resultado esperas demostrar.";
     if (!state.form.openTopic.trim()) return "Describe brevemente el problema o tema que le interesa al estudiante.";
   }
 
@@ -946,9 +1174,339 @@ function buildProfile(form, student) {
   };
 }
 
+function buildProfileV2(form, student) {
+  const methodologyAverage = average([
+    form.literatureConfidence,
+    form.problemDefinitionConfidence,
+    form.dataAccessConfidence,
+    form.dataAnalysisConfidence,
+    form.writingConfidence,
+  ]);
+
+  const clusterScores = buildClusterScoresV2(form, student, methodologyAverage);
+  const rankedClusters = Object.entries(clusterScores)
+    .sort(([, a], [, b]) => b - a)
+    .map(([key, value]) => ({ key, value }));
+
+  const primary = PROFILE_ARCHETYPES[rankedClusters[0].key];
+  const secondary = PROFILE_ARCHETYPES[rankedClusters[1].key];
+  const normalizedBars = rankedClusters.map(({ key, value }) => ({
+    key,
+    label: PROFILE_ARCHETYPES[key].label,
+    score: value,
+    percent: normalizeScore(value, rankedClusters[0].value),
+  }));
+
+  const methodologyLevel = getMethodologyLevel(methodologyAverage, form.aiToolsConfidence);
+  const strengths = inferStrengthsV2(form);
+  const risks = inferRisksV2(form);
+  const scoredTopics = TOPIC_BLUEPRINTS
+    .map((blueprint) => scoreTopicBlueprint(blueprint, form, student, rankedClusters))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((item, index) => materializeTopicFromBlueprint(item.blueprint, form, student, item.score, index));
+
+  const summary = buildNarrativeSummaryV2({
+    student,
+    form,
+    primary,
+    secondary,
+    methodologyAverage,
+    methodologyLevel,
+    strengths,
+    topTheme: scoredTopics[0],
+  });
+
+  return {
+    primaryCluster: primary.label,
+    secondaryCluster: secondary.label,
+    primaryKey: rankedClusters[0].key,
+    recommendedLine: scoredTopics[0]?.line || primary.recommendedLine,
+    methodologyLevel,
+    methodologyScore: Number(methodologyAverage.toFixed(1)),
+    scores: normalizedBars,
+    strengths,
+    risks,
+    summary,
+    themes: scoredTopics,
+  };
+}
+
+function buildClusterScoresV2(form, student, methodologyAverage) {
+  const scores = {
+    education_ai: 0,
+    data_decision: 0,
+    digital_innovation: 0,
+    social_research: 0,
+    optimization_systems: 0,
+  };
+
+  const interestWeight = {
+    aec: { optimization_systems: 4, data_decision: 2, digital_innovation: 1 },
+    education: { education_ai: 4, social_research: 1, digital_innovation: 1 },
+    business: { digital_innovation: 3, data_decision: 2, optimization_systems: 2 },
+    public: { social_research: 2, data_decision: 2, digital_innovation: 2 },
+    health: { data_decision: 2, social_research: 2, optimization_systems: 1 },
+    technology: { optimization_systems: 3, data_decision: 2, digital_innovation: 2 },
+  };
+
+  const focusWeight = {
+    automation: { optimization_systems: 3, digital_innovation: 2 },
+    prediction: { data_decision: 4, optimization_systems: 1 },
+    decision: { data_decision: 3, digital_innovation: 1 },
+    experience: { education_ai: 2, social_research: 1, digital_innovation: 1 },
+    ethics: { social_research: 3, education_ai: 1 },
+    productivity: { optimization_systems: 2, digital_innovation: 1, education_ai: 1 },
+    quality: { optimization_systems: 2, data_decision: 2 },
+    documents: { education_ai: 1, digital_innovation: 2, optimization_systems: 2 },
+    safety: { optimization_systems: 2, data_decision: 2, social_research: 1 },
+  };
+
+  const outputWeight = {
+    automation: { optimization_systems: 3, digital_innovation: 2 },
+    dashboard: { data_decision: 3, digital_innovation: 1 },
+    predictive: { data_decision: 4, optimization_systems: 1 },
+    prototype: { optimization_systems: 2, digital_innovation: 3 },
+    chatbot: { education_ai: 2, digital_innovation: 3 },
+    diagnostic: { social_research: 3, education_ai: 1 },
+    strategy: { digital_innovation: 3, social_research: 1, data_decision: 1 },
+  };
+
+  const methodWeight = {
+    applied: { optimization_systems: 2, digital_innovation: 2 },
+    quantitative: { data_decision: 3, optimization_systems: 1 },
+    qualitative: { social_research: 3, education_ai: 1 },
+    mixed: { education_ai: 1, digital_innovation: 1, social_research: 2, data_decision: 1 },
+  };
+
+  const evidenceWeight = {
+    tabular: { data_decision: 3, optimization_systems: 1 },
+    documents: { optimization_systems: 2, digital_innovation: 1, education_ai: 1 },
+    images: { optimization_systems: 3, data_decision: 1 },
+    survey: { social_research: 2, education_ai: 1, data_decision: 1 },
+    none: { education_ai: 1, social_research: 1 },
+  };
+
+  applyWeights(scores, interestWeight[form.interestArea]);
+  form.problemFocus.forEach((focus) => applyWeights(scores, focusWeight[focus]));
+  applyWeights(scores, outputWeight[form.thesisOutput]);
+  applyWeights(scores, methodWeight[form.methodologyPreference]);
+  applyWeights(scores, evidenceWeight[form.evidencePreference]);
+
+  if (form.desiredImpact === "institutional") {
+    scores.data_decision += 2;
+    scores.digital_innovation += 2;
+  } else if (form.desiredImpact === "social") {
+    scores.social_research += 2;
+    scores.education_ai += 1;
+  } else {
+    scores.optimization_systems += 1;
+    scores.education_ai += 1;
+  }
+
+  if (form.motivation === "build-solution") scores.optimization_systems += 2;
+  if (form.motivation === "solve-real") scores.digital_innovation += 2;
+  if (form.motivation === "graduate") scores.education_ai += 1;
+  if (form.motivation === "publish") scores.social_research += 1;
+
+  if (form.dataAnalysisConfidence >= 4) scores.data_decision += 2;
+  if (form.aiToolsConfidence >= 4) scores.optimization_systems += 1;
+  if (form.problemDefinitionConfidence >= 4) scores.digital_innovation += 1;
+  if (form.writingConfidence >= 4) scores.education_ai += 1;
+  if (form.dataAccessConfidence >= 4) scores.digital_innovation += 1;
+
+  const keywordBoosts = inferKeywordClusterBoosts(`${student.career} ${form.unitOfAnalysis} ${form.improvementGoal} ${form.openTopic}`);
+  applyWeights(scores, keywordBoosts);
+
+  if (methodologyAverage <= 2.8) {
+    scores.education_ai += 1;
+    scores.social_research += 1;
+  }
+
+  return scores;
+}
+
+function scoreTopicBlueprint(blueprint, form, student, rankedClusters) {
+  let score = 40;
+  const topCluster = rankedClusters[0]?.key;
+  const secondCluster = rankedClusters[1]?.key;
+  const contextText = `${student.career} ${student.institution} ${form.unitOfAnalysis} ${form.improvementGoal} ${form.openTopic}`.toLowerCase();
+
+  if (blueprint.cluster === topCluster) score += 18;
+  if (blueprint.cluster === secondCluster) score += 8;
+  if (blueprint.sectors.includes(form.interestArea)) score += 18;
+  if (form.problemFocus.some((focus) => blueprint.focuses.includes(focus))) score += 16;
+  if (blueprint.outputs.includes(form.thesisOutput)) score += 16;
+  if (blueprint.evidence.includes(form.evidencePreference)) score += 12;
+  if (blueprint.methods.includes(form.methodologyPreference)) score += 10;
+
+  if (form.dataAccessConfidence >= 4 && form.evidencePreference !== "none") score += 6;
+  if (form.aiToolsConfidence >= 4 && ["automation", "prototype", "chatbot", "predictive"].includes(form.thesisOutput)) score += 5;
+  if (form.dataAnalysisConfidence >= 4 && ["tabular", "images"].includes(form.evidencePreference)) score += 5;
+  if (form.writingConfidence >= 4 && ["documents", "survey"].includes(form.evidencePreference)) score += 3;
+
+  score += getKeywordMatchBonus(blueprint, contextText);
+
+  return { blueprint, score };
+}
+
+function materializeTopicFromBlueprint(blueprint, form, student, rawScore, index) {
+  const titles = blueprint.titles || {};
+  const baseTitle = titles[form.interestArea] || titles.generic || "Tema de investigacion sugerido";
+  const title = createConcreteThesisTitle(baseTitle, form, student, index);
+  const line = `${PROFILE_ARCHETYPES[blueprint.cluster].recommendedLine}`;
+  const fitScore = Math.min(100, Math.max(74, Math.round(rawScore - index * 3)));
+  return {
+    id: blueprint.id,
+    title,
+    angle: buildThemeAngle(blueprint, form),
+    methodology: blueprint.methodology,
+    fitScore,
+    line,
+  };
+}
+
+function createConcreteThesisTitle(baseTitle, form, student, index) {
+  const unit = compactPhrase(form.unitOfAnalysis, 82);
+  const goal = compactPhrase(form.improvementGoal, 88);
+  const suffixes = [];
+  const normalizedBase = normalizeComparableText(baseTitle);
+  const normalizedUnit = normalizeComparableText(unit);
+
+  if (unit) {
+    const lowerUnit = unit.toLowerCase();
+    if (!hasMeaningfulOverlap(normalizedBase, normalizedUnit)) {
+      suffixes.push(`en ${lowerUnit}`);
+    }
+  }
+
+  if (goal && index === 0) {
+    suffixes.push(`orientado a ${goal.toLowerCase()}`);
+  }
+
+  const careerHint = student.career?.toLowerCase().includes("civil") && !normalizedBase.includes("ingenieria civil")
+    ? "para ingenieria civil"
+    : "";
+
+  if (careerHint) suffixes.push(careerHint);
+
+  return [baseTitle, ...suffixes].join(" ").replace(/\s+/g, " ").trim();
+}
+
+function buildThemeAngle(blueprint, form) {
+  const fragments = [blueprint.angle];
+  if (form.improvementGoal.trim()) fragments.push(compactPhrase(form.improvementGoal, 72));
+  return fragments.join(", ");
+}
+
+function buildNarrativeSummaryV2({ student, form, primary, secondary, methodologyAverage, methodologyLevel, strengths, topTheme }) {
+  const evidenceMap = {
+    tabular: "cuenta con una base de datos o registros tabulares potenciales",
+    documents: "tiene mejor ajuste para trabajar con documentos, normas o reportes",
+    images: "podria sostener un estudio con imagenes o evidencia visual",
+    survey: "puede apoyarse en encuestas o percepciones de usuarios",
+    none: "todavia necesita consolidar la fuente principal de evidencia",
+  };
+
+  const outputMap = {
+    automation: "una solucion de automatizacion",
+    dashboard: "un dashboard para decisiones",
+    predictive: "un modelo predictivo o clasificatorio",
+    prototype: "un prototipo funcional",
+    chatbot: "un asistente inteligente o chatbot",
+    diagnostic: "un diagnostico aplicado",
+    strategy: "una propuesta de mejora o roadmap",
+  };
+
+  const strongest = strengths[0]
+    ? strengths[0].replace(/\.$/, "").toLowerCase()
+    : "requiere una ruta guiada para consolidar el enfoque";
+
+  const topTopicText = topTheme
+    ? `La sugerencia mas consistente es ${topTheme.title.toLowerCase()}.`
+    : "";
+
+  return `${student.fullName} muestra un perfil principal en ${primary.label.toLowerCase()} y una afinidad secundaria hacia ${secondary.label.toLowerCase()}. Sus respuestas apuntan a desarrollar ${outputMap[form.thesisOutput]} en el contexto de ${form.unitOfAnalysis.toLowerCase()}, buscando ${form.improvementGoal.toLowerCase()}. En evidencia, ${evidenceMap[form.evidencePreference]}; metodologicamente se ubica en un nivel ${methodologyLevel.toLowerCase()} (${methodologyAverage.toFixed(1)}/5). Como fortaleza inicial, ${strongest}. ${topTopicText}`;
+}
+
+function inferStrengthsV2(form) {
+  const strengths = inferStrengths(form);
+  if (form.dataAccessConfidence >= 4) strengths.push("Tiene acceso razonablemente viable a datos o evidencia para ejecutar la tesis.");
+  if (form.methodologyPreference === "applied") strengths.push("Tiene orientacion a construir una solucion concreta y evaluable.");
+  return strengths.slice(0, 4);
+}
+
+function inferRisksV2(form) {
+  const risks = inferRisks(form);
+  if (form.dataAccessConfidence <= 2) risks.unshift("Debe asegurar pronto la disponibilidad de datos, documentos o usuarios para no forzar un tema inviable.");
+  if (form.evidencePreference === "none") risks.unshift("Conviene elegir un tema con evidencia accesible antes de comprometer un diseno metodologico.");
+  return Array.from(new Set(risks)).slice(0, 4);
+}
+
+function inferKeywordClusterBoosts(text) {
+  const lower = String(text || "").toLowerCase();
+  const boosts = {};
+
+  const keywordMap = [
+    { words: ["obra", "bim", "metrados", "revit", "etabs", "civil", "construccion", "expediente", "norma"], weights: { optimization_systems: 2, data_decision: 1 } },
+    { words: ["tesis", "estudiante", "redaccion", "academ", "aprendizaje", "docente"], weights: { education_ai: 2, social_research: 1 } },
+    { words: ["dashboard", "indicador", "priorizacion", "decision", "control"], weights: { data_decision: 2, digital_innovation: 1 } },
+    { words: ["chatbot", "asistente", "consulta", "documento", "pdf"], weights: { digital_innovation: 2, optimization_systems: 1 } },
+    { words: ["encuesta", "adopcion", "percepcion", "etica", "usuarios"], weights: { social_research: 2, education_ai: 1 } },
+    { words: ["predic", "clasific", "modelo", "riesgo", "costo", "plazo"], weights: { data_decision: 2, optimization_systems: 1 } },
+  ];
+
+  keywordMap.forEach((entry) => {
+    if (entry.words.some((word) => lower.includes(word))) {
+      applyWeights(boosts, entry.weights);
+    }
+  });
+
+  return boosts;
+}
+
+function getKeywordMatchBonus(blueprint, text) {
+  const keywordSets = {
+    "aec-automation-metrados": ["metrado", "metrados", "reporte", "obra", "civil", "construccion", "automat"],
+    "aec-computer-vision-epp": ["epp", "seguridad", "casco", "vision", "imagen", "video", "obra"],
+    "aec-predictive-cost-time": ["costo", "plazo", "desviacion", "riesgo", "predic", "cronograma"],
+    "aec-chatbot-normas": ["norma", "pdf", "consulta", "chatbot", "documento", "reglamento"],
+    "thesis-copilot-formulation": ["tesis", "problema", "formulacion", "estudiante", "investigacion"],
+    "thesis-writing-feedback": ["redaccion", "texto", "retroaliment", "escritura", "coherencia"],
+    "dashboard-decision-support": ["dashboard", "indicador", "prioriz", "decision", "visualizacion"],
+    "digital-adoption-ai": ["adopcion", "aceptacion", "percepcion", "confianza", "etica"],
+    "process-improvement-ai": ["proceso", "mejora", "tiempo", "error", "automatizacion"],
+    "document-analysis-ai": ["documento", "pdf", "norma", "clasificar", "extraer", "validar"],
+  };
+
+  const terms = keywordSets[blueprint.id] || [];
+  return terms.reduce((bonus, term) => bonus + (text.includes(term) ? 3 : 0), 0);
+}
+
+function compactPhrase(text, maxLength) {
+  const clean = String(text || "").trim().replace(/\.$/, "");
+  if (!clean) return "";
+  if (clean.length <= maxLength) return clean;
+  return `${clean.slice(0, Math.max(1, maxLength - 3)).trim()}...`;
+}
+
+function normalizeComparableText(text) {
+  return String(text || "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "");
+}
+
+function hasMeaningfulOverlap(base, fragment) {
+  if (!base || !fragment) return false;
+  const baseWords = new Set(base.split(/[^a-z0-9]+/).filter((word) => word.length >= 5));
+  const fragmentWords = fragment.split(/[^a-z0-9]+/).filter((word) => word.length >= 5);
+  return fragmentWords.some((word) => baseWords.has(word));
+}
+
 function applyWeights(target, weights) {
   Object.entries(weights || {}).forEach(([key, value]) => {
-    target[key] += value;
+    target[key] = (target[key] || 0) + value;
   });
 }
 
