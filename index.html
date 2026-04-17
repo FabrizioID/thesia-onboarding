@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ThesIA | Brief Onboarding de Investigación</title>
+  <meta
+    name="description"
+    content="Plataforma de onboarding y perfilamiento para metodología de investigación con inteligencia artificial."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="./index.html">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" role="img">
+            <path d="M32 6 12 16v16c0 11 7.6 20.8 20 26 12.4-5.2 20-15 20-26V16L32 6Z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/>
+            <path d="m24 24-8 8 8 8M40 24l8 8-8 8M35 20l-6 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <strong>ThesIA</strong>
+          <small>Copiloto para investigación</small>
+        </span>
+      </a>
+      <nav class="topbar-nav">
+        <a href="#experiencia">Experiencia</a>
+        <a href="#diagnostico">Diagnóstico</a>
+        <a href="?view=admin">Panel docente</a>
+      </nav>
+    </header>
+
+    <main id="app"></main>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
